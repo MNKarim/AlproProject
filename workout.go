@@ -140,19 +140,20 @@ func hapusWorkout(){
 	fmt.Print("Masukkan nomor workout yang ingin dihapus (1 - ", jumlahData, "): ")
 	fmt.Scan(&index)
 
-	index-- // karena user memasukkan nomor mulai dari 1, bukan indeks array (0)
+	index--
 
 	if index < 0 || index >= jumlahData {
-		fmt.Println("Nomor tidak valid.")
-		return
+		printRiwayat()
+		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		menu("Nomor tidak valid!", opsi, "KELOLA")
+		hapusWorkout()
 	}
 
-	// Geser data ke kiri mulai dari indeks yang dihapus
 	for i := index; i < jumlahData-1; i++ {
 		dW[i] = dW[i+1]
 	}
 
-	jumlahData-- // Kurangi jumlah data
+	jumlahData--
 	printRiwayat()
 	opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
 	menu("workout berhasil dihapus", opsi, "KELOLA")
