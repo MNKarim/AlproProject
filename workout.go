@@ -146,7 +146,7 @@ func hapusWorkout(){
 		printRiwayat()
 		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
 		menu("Nomor tidak valid!", opsi, "KELOLA")
-		hapusWorkout()
+		kelolaWorkout()
 	}
 
 	for i := index; i < jumlahData-1; i++ {
