@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"os/exec"
 )
 
 const NMAX int = 100
@@ -23,7 +25,7 @@ func main() {
 
 func header() {
 	opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
-	menu("Pilih opsi:", opsi, "MAIN", false)
+	menu("Pilih keperluan anda", opsi, "MAIN", false)
 	main_menu()
 }
 
@@ -33,9 +35,8 @@ func main_menu() {
 
 	switch pilihan {
 	case 1:
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
-		menu("Pilih opsi:", opsi, "KELOLA", false)
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+		menu("Pilih keperluan anda", opsi, "KELOLA", false)
 		kelolaWorkout()
 	case 2:
 		rekomendasi()
@@ -51,12 +52,14 @@ func main_menu() {
 }
 
 func menu(teks string, opsi []string, tipeMenu string, hide bool) {
+	clear()
 if tipeMenu == "MAIN" {
 		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
 		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s│%50s%-23s│\n", "", "Aplikasi Manajemen Workout", "")
 		fmt.Printf("%25s│%73s│\n", "", "")
 	} else if tipeMenu == "KELOLA" {
+		printRiwayat()
 		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
 		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s│%43s%-30s│\n", "", "Kelola Riwayat", "")
@@ -89,20 +92,27 @@ func kelolaWorkout(){
 	case 1:
 		tambahWorkout()
 	case 2:
-		urutkanWorkout()
+		ubahWorkout()
 	case 3:
 		hapusWorkout()
 	case 4:
-		ubahWorkout()
+		selectionSortDurasi()
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+		menu("Data berhasil diurutkan", opsi, "KELOLA", false)
+		kelolaWorkout()
 	case 5:
-		cariLatihan()
+		insertionSortKalori()
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+		menu("Data berhasil diurutkan", opsi, "KELOLA", false)
+		kelolaWorkout()
 	case 6:
+		cariLatihan()
+	case 7:
 		opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
 		menu("Pilih opsi: ", opsi, "MAIN", false)
 		main_menu()
 	default:
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("Masukkan angka sesuai opsi!", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
@@ -121,21 +131,18 @@ func tambahWorkout(){
 	fmt.Scan(&w.jadwal)
 	dW[jumlahData] = w
 	jumlahData++
-	printRiwayat()
-	opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 	menu("Pilih opsi:", opsi, "KELOLA", false)
 	kelolaWorkout()
 }
 
 func urutkanWorkout(){
 	if jumlahData == 0 {
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
 
-	printRiwayat()
 	opsi := []string{"1. Urutkan berdasarkan durasi", "2. Urutkan berdasarkan kalori"}
 	menu("Pilih metode pengurutan: ", opsi, "KELOLA", false)
 
@@ -148,13 +155,11 @@ func urutkanWorkout(){
 	case 2:
 		insertionSortKalori()
 	default:
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("Masukkan angka sesuai opsi!", opsi, "KELOLA", false)
-		kelolaWorkout()
+		urutkanWorkout()
 	}
 
-	printRiwayat()
 	opsi = []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
 	menu("Data berhasil diurutkan", opsi, "KELOLA", false)
 	kelolaWorkout()
@@ -162,21 +167,19 @@ func urutkanWorkout(){
 
 func hapusWorkout(){
 	if jumlahData == 0 {
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("Belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
 
 	var index int
-	fmt.Print("Masukkan nomor workout yang ingin dihapus (1 - ", jumlahData, "): ")
+	fmt.Printf("%25sMasukkan nomor workout yang ingin dihapus (1 -  %d): ", "", jumlahData)
 	fmt.Scan(&index)
 
 	index--
 
 	if index < 0 || index >= jumlahData {
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("Nomor tidak valid!", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
@@ -186,54 +189,48 @@ func hapusWorkout(){
 	}
 
 	jumlahData--
-	printRiwayat()
-	opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 	menu("workout berhasil dihapus", opsi, "KELOLA", false)
 	kelolaWorkout()
 }
 
 func ubahWorkout(){
 	if jumlahData == 0 {
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
 
 	var index int
-	printRiwayat()
-	fmt.Print("Masukkan nomor workout yang ingin diubah (1 - ", jumlahData, "): ")
+	fmt.Printf("%25sMasukkan nomor workout yang ingin diubah (1 -  %d): ", "", jumlahData)
 	fmt.Scan(&index)
 
 	index--
 
 	if index < 0 || index >= jumlahData {
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("Nomor tidak valid!", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
 
-	fmt.Println("Masukkan data baru:")
-	fmt.Print("Latihan: ")
+	fmt.Printf("%25sMasukkan data baru:\n", "")
+	fmt.Printf("%25sLatihan: ", "")
 	fmt.Scan(&dW[index].latihan)
-	fmt.Print("Durasi (menit): ")
+	fmt.Printf("%25sDurasi (menit): ", "")
 	fmt.Scan(&dW[index].durasi)
-	fmt.Print("Kalori: ")
+	fmt.Printf("%25sKalori: ", "")
 	fmt.Scan(&dW[index].kalori)
-	fmt.Print("Tanggal (YYYY-MM-DD): ")
+	fmt.Printf("%25sTanggal (YYYY-MM-DD): ", "")
 	fmt.Scan(&dW[index].jadwal)
 
-	printRiwayat()
-	opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali"}
+	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 	menu("Workout berhasil diubah", opsi, "KELOLA", false)
 	kelolaWorkout()
 }
 
 func cariLatihan(){
 	if jumlahData == 0 {
-		printRiwayat()
-		opsi := []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
 		kelolaWorkout()
 	}
@@ -255,16 +252,14 @@ func laporan(){
 	}
 }
 
-func printRiwayat(){
+func printRiwayat() {
 	if jumlahData == 0 {
 		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
 		fmt.Printf("%25s│%73s│\n", "", "")
-		fmt.Printf("%25s│%29s%-44s│\n", "", "", "Riwayat Workout: ")
+		fmt.Printf("%25s│%29s%-44s│\n", "", "", "RIWAYAT WORKOUT: ")
 		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
-		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s│%25s%-48s│\n", "", "", "Belum ada data workout.")
-		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
 	} else {
 		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
@@ -272,16 +267,14 @@ func printRiwayat(){
 		fmt.Printf("%25s│%29s%-44s│\n", "", "", "RIWAYAT WORKOUT: ")
 		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
-    	for i := 0; i < jumlahData; i++ {
-        	fmt.Printf("%25s│%15s%-58d│\n", "", "Workout #", i+1)
-			fmt.Printf("%25s│%35s%-38s│\n", "", "Jenis   : ", dW[i].latihan )
-			fmt.Printf("%25s│%35s%-38d│\n", "", "Durasi   : ", dW[i].durasi)
-        	fmt.Printf("%25s│%35s%-38d│\n", "", "Kalori   : ", dW[i].kalori)
-        	fmt.Printf("%25s│%35s%-38s│\n", "", "Tanggal   : ", dW[i].jadwal )
+		fmt.Printf("%25s│  %-20s  %-10s  %-10s  %-25s│\n", "", "Workout", "Durasi", "Kalori", "Tanggal")
+		for i := 0; i < jumlahData; i++ {
+			fmt.Printf("%25s│ %d.  %-17s  %-10d  %-10d  %-25s│\n", "", i+1,dW[i].latihan, dW[i].durasi, dW[i].kalori, dW[i].jadwal)
 		}
 		fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
-    }
+	}
 }
+
 
 func selectionSortDurasi() {
 	for i := 0; i < jumlahData-1; i++ {
@@ -307,6 +300,12 @@ func insertionSortKalori() {
 		}
 		dW[j+1] = key
 	}
+}
+
+func clear() {
+	cmd := exec.Command("cmd", "/c", "cls")
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 }
 
 func keluar(){
