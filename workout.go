@@ -20,6 +20,7 @@ var dW [NMAX]workout
 var jumlahData int
 
 func main() {
+	load()
 	header()
 }
 
@@ -60,10 +61,6 @@ if tipeMenu == "MAIN" {
 		fmt.Printf("%25s│%73s│\n", "", "")
 	} else if tipeMenu == "KELOLA" {
 		printRiwayat()
-		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
-		fmt.Printf("%25s│%73s│\n", "", "")
-		fmt.Printf("%25s│%43s%-30s│\n", "", "Kelola Riwayat", "")
-		fmt.Printf("%25s│%73s│\n", "", "")
 	}
 		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
 	fmt.Printf("%25s│%73s│\n", "", "")
@@ -267,9 +264,11 @@ func printRiwayat() {
 		fmt.Printf("%25s│%29s%-44s│\n", "", "", "RIWAYAT WORKOUT: ")
 		fmt.Printf("%25s│%73s│\n", "", "")
 		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
-		fmt.Printf("%25s│  %-20s  %-10s  %-10s  %-25s│\n", "", "Workout", "Durasi", "Kalori", "Tanggal")
+		fmt.Printf("%25s│  %-21s  %-10s  %-15s  %-19s│\n", "", "Workout", "Durasi", "Kalori", "Jadwal")
 		for i := 0; i < jumlahData; i++ {
-			fmt.Printf("%25s│ %d.  %-17s  %-10d  %-10d  %-25s│\n", "", i+1,dW[i].latihan, dW[i].durasi, dW[i].kalori, dW[i].jadwal)
+			durasiStr := fmt.Sprintf("%d menit", dW[i].durasi)
+			kaloriStr := fmt.Sprintf("%d kkal", dW[i].kalori)
+			fmt.Printf("%25s│ %2d.  %-17s  %-10s  %-15s  %-19s│\n", "", i+1,dW[i].latihan, durasiStr, kaloriStr, dW[i].jadwal)
 		}
 		fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
 	}
@@ -307,6 +306,22 @@ func clear() {
 	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
+
+func load() {
+	dW[0] = workout{"Push Up", 30, 150, "2025-05-01"}
+	dW[1] = workout{"Jogging", 45, 300, "2025-05-02"}
+	dW[2] = workout{"Plank", 10, 50, "2025-05-03"}
+	dW[3] = workout{"Squat", 20, 120, "2025-05-04"}
+	dW[4] = workout{"Yoga", 60, 200, "2025-05-05"}
+	dW[5] = workout{"Cycling", 50, 400, "2025-05-06"}
+	dW[6] = workout{"Lunges", 25, 140, "2025-05-07"}
+	dW[7] = workout{"Burpees", 15, 180, "2025-05-08"}
+	dW[8] = workout{"Sit Up", 35, 160, "2025-05-09"}
+	dW[9] = workout{"Jump Rope", 20, 220, "2025-05-10"}
+	jumlahData = 10
+}
+
+
 
 func keluar(){
 
