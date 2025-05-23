@@ -44,7 +44,7 @@ func main_menu() {
 	case 3:
 		laporan()
 	case 4:
-		keluar()
+		clear()
 	default:
 		opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
 		menu("Masukkan angka sesuai opsi!", opsi, "MAIN", false)
@@ -130,35 +130,6 @@ func tambahWorkout(){
 	jumlahData++
 	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 	menu("Pilih opsi:", opsi, "KELOLA", false)
-	kelolaWorkout()
-}
-
-func urutkanWorkout(){
-	if jumlahData == 0 {
-		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
-		kelolaWorkout()
-	}
-
-	opsi := []string{"1. Urutkan berdasarkan durasi", "2. Urutkan berdasarkan kalori"}
-	menu("Pilih metode pengurutan: ", opsi, "KELOLA", false)
-
-	var pilihan int
-	fmt.Scan(&pilihan)
-
-	switch pilihan {
-	case 1:
-		selectionSortDurasi()
-	case 2:
-		insertionSortKalori()
-	default:
-		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Masukkan angka sesuai opsi!", opsi, "KELOLA", false)
-		urutkanWorkout()
-	}
-
-	opsi = []string{"1. Tambah Workout", "2. Urutkan Riwayat", "3. Hapus Workout", "4. Ubah Workout", "5. Cari Latihan", "6. Kembali",}
-	menu("Data berhasil diurutkan", opsi, "KELOLA", false)
 	kelolaWorkout()
 }
 
@@ -275,6 +246,11 @@ func printRiwayat() {
 
 
 func selectionSortDurasi() {
+	if jumlahData == 0 {
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		kelolaWorkout()
+	}
 	for i := 0; i < jumlahData-1; i++ {
 		maxIdx := i
 		for j := i + 1; j < jumlahData; j++ {
@@ -289,6 +265,11 @@ func selectionSortDurasi() {
 }
 
 func insertionSortKalori() {
+	if jumlahData == 0 {
+		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		kelolaWorkout()
+	}
 	for i := 1; i < jumlahData; i++ {
 		key := dW[i]
 		j := i - 1
@@ -318,18 +299,14 @@ func clear() {
 
 func load() {
 	dW[0] = workout{"Push Up", 30, 150, "08:00"}
-	dW[1] = workout{"Jogging", 45, 300, "08:30"}
-	dW[2] = workout{"Plank", 10, 50, "09:15"}
-	dW[3] = workout{"Squat", 20, 120, "2025-05-04"}
-	dW[4] = workout{"Yoga", 60, 200, "2025-05-05"}
-	dW[5] = workout{"Bersepeda", 50, 400, "2025-05-06"}
-	dW[6] = workout{"Lunges", 25, 140, "2025-05-07"}
-	dW[7] = workout{"Burpees", 15, 180, "2025-05-08"}
-	dW[8] = workout{"Sit Up", 35, 160, "2025-05-09"}
-	dW[9] = workout{"Jump Rope", 20, 220, "2025-05-10"}
+	dW[1] = workout{"Jogging", 45, 300, "08:35"}
+	dW[2] = workout{"Plank", 10, 50, "09:25"}
+	dW[3] = workout{"Squat", 20, 120, "09:40"}
+	dW[4] = workout{"Yoga", 60, 200, "10:05"}
+	dW[5] = workout{"Bersepeda", 50, 400, "15:20"}
+	dW[6] = workout{"Lunges", 25, 140, "16:15"}
+	dW[7] = workout{"Burpees", 15, 180, "16:55"}
+	dW[8] = workout{"Sit Up", 35, 160, "17:15"}
+	dW[9] = workout{"Jump Rope", 20, 220, "17:55"}
 	jumlahData = 10
-}
-
-func keluar(){
-
 }
