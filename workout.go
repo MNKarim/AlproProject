@@ -124,7 +124,7 @@ func tambahWorkout(){
 	fmt.Scan(&w.durasi)
 	fmt.Printf("%25sKalori: ", "")
 	fmt.Scan(&w.kalori)
-	fmt.Printf("%25stanggal (YYYY-MM-DD): ", "")
+	fmt.Printf("%25sJadwal (jj:mm): ", "")
 	fmt.Scan(&w.jadwal)
 	dW[jumlahData] = w
 	jumlahData++
@@ -270,7 +270,6 @@ func printRiwayat() {
 			kaloriStr := fmt.Sprintf("%d kkal", dW[i].kalori)
 			fmt.Printf("%25s│ %2d.  %-17s  %-10s  %-15s  %-19s│\n", "", i+1,dW[i].latihan, durasiStr, kaloriStr, dW[i].jadwal)
 		}
-		fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
 	}
 }
 
@@ -301,6 +300,16 @@ func insertionSortKalori() {
 	}
 }
 
+func sortByLatihan() {
+	for i := 0; i < jumlahData-1; i++ {
+		for j := i + 1; j < jumlahData; j++ {
+			if dW[i].latihan > dW[j].latihan {
+				dW[i], dW[j] = dW[j], dW[i]
+			}
+		}
+	}
+}
+
 func clear() {
 	cmd := exec.Command("cmd", "/c", "cls")
 	cmd.Stdout = os.Stdout
@@ -308,20 +317,18 @@ func clear() {
 }
 
 func load() {
-	dW[0] = workout{"Push Up", 30, 150, "2025-05-01"}
-	dW[1] = workout{"Jogging", 45, 300, "2025-05-02"}
-	dW[2] = workout{"Plank", 10, 50, "2025-05-03"}
+	dW[0] = workout{"Push Up", 30, 150, "08:00"}
+	dW[1] = workout{"Jogging", 45, 300, "08:30"}
+	dW[2] = workout{"Plank", 10, 50, "09:15"}
 	dW[3] = workout{"Squat", 20, 120, "2025-05-04"}
 	dW[4] = workout{"Yoga", 60, 200, "2025-05-05"}
-	dW[5] = workout{"Cycling", 50, 400, "2025-05-06"}
+	dW[5] = workout{"Bersepeda", 50, 400, "2025-05-06"}
 	dW[6] = workout{"Lunges", 25, 140, "2025-05-07"}
 	dW[7] = workout{"Burpees", 15, 180, "2025-05-08"}
 	dW[8] = workout{"Sit Up", 35, 160, "2025-05-09"}
 	dW[9] = workout{"Jump Rope", 20, 220, "2025-05-10"}
 	jumlahData = 10
 }
-
-
 
 func keluar(){
 
