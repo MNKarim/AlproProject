@@ -228,35 +228,15 @@ func cariLatihan() {
 			i++
 		}
 	}
-	opsi := []string{"1. Hapus Workout", "2. Ubah Workout", "3. Kembali"}
+	opsi := []string{"Tekan apa saja untuk kembali"}
 	menu("data ditemukan", opsi, "", false)
 
-	var pilihan, nomor int
+	var pilihan int
 	fmt.Scan(&pilihan)
 
-	switch pilihan {
-	case 1:
-		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		fmt.Printf("%25sPilih nomor workout dari hasil pencarian yang ingin dihapus: ", "")
-			fmt.Scan(&nomor)
-			nomor--
-			if nomor >= 0 && hasilIndex[nomor] != -1 {
-				idxHapus := hasilIndex[nomor]
-				for i := idxHapus; i < jumlahData-1; i++ {
-					dW[i] = dW[i+1]
-				}
-				jumlahData--
-				menu("Workout berhasil dihapus", opsi, "KELOLA", false)
-			}
-			kelolaWorkout()
-	case 2:
-
-	case 3:
-		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Pilih keperluan anda", opsi, "KELOLA", false)
-		kelolaWorkout()
-	}
-
+	opsi = []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+	menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+	kelolaWorkout()
 }
 
 func sequentialSearchLatihan(keyword string) [NMAX]int {
@@ -380,7 +360,7 @@ func clear() {
 }
 
 func load() {
-	dW[0] = workout{"Push Up", 30, 150, "08:00"}
+	dW[0] = workout{"Push_Up", 30, 150, "Senin, 08:00"}
 	dW[1] = workout{"Jogging", 45, 300, "08:35"}
 	dW[2] = workout{"Plank", 10, 50, "09:25"}
 	dW[3] = workout{"Squat", 20, 120, "09:40"}
@@ -388,7 +368,7 @@ func load() {
 	dW[5] = workout{"Bersepeda", 50, 400, "15:20"}
 	dW[6] = workout{"Lunges", 25, 140, "16:15"}
 	dW[7] = workout{"Burpees", 15, 180, "16:55"}
-	dW[8] = workout{"Sit Up", 35, 160, "17:15"}
+	dW[8] = workout{"Sit_Up", 35, 160, "17:15"}
 	dW[9] = workout{"Jump Rope", 20, 220, "17:55"}
 	jumlahData = 10
 }
