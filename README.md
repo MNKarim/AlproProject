@@ -7,7 +7,7 @@ Pengguna aplikasi ini adalah individu yang ingin melacak kemajuan olahraga merek
 ## Dibuat Oleh
 
 - Muhammad Naufal Karim
-- Rigo Chandra
+- Rigo Candra
 
 ## Spesifikasi
 - a.	Pengguna dapat menambahkan, mengubah dan menghapus riwayat workout harian mereka.
