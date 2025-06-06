@@ -27,7 +27,7 @@ func main() {
 
 func header() {
 	opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
-	menu("Pilih keperluan anda", opsi, "MAIN", false)
+	menu("Pilih keperluan anda", opsi, "MAIN")
 	main_menu()
 }
 
@@ -38,7 +38,7 @@ func main_menu() {
 	switch pilihan {
 	case 1:
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Pilih keperluan anda", opsi, "KELOLA", false)
+		menu("Pilih keperluan anda", opsi, "KELOLA")
 		kelolaWorkout()
 	case 2:
 		rekomendasi()
@@ -48,12 +48,12 @@ func main_menu() {
 		clear()
 	default:
 		opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
-		menu("Masukkan angka sesuai opsi!", opsi, "MAIN", false)
+		menu("Masukkan angka sesuai opsi!", opsi, "MAIN")
 		main_menu()
 	}
 }
 
-func menu(teks string, opsi []string, tipeMenu string, hide bool) {
+func menu(teks string, opsi []string, tipeMenu string) {
 	if tipeMenu == "MAIN" {
 		clear()
 		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
@@ -78,9 +78,7 @@ func menu(teks string, opsi []string, tipeMenu string, hide bool) {
 	}
 
 	fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
-	if !hide {
-		fmt.Printf("%25sPILIH OPSI: ", "")
-	}
+	fmt.Printf("%25sPILIH OPSI: ", "")
 }
 
 func kelolaWorkout() {
@@ -97,22 +95,22 @@ func kelolaWorkout() {
 	case 4:
 		selectionSortDurasi()
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Data berhasil diurutkan", opsi, "KELOLA", false)
+		menu("Data berhasil diurutkan", opsi, "KELOLA")
 		kelolaWorkout()
 	case 5:
 		insertionSortKalori()
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Data berhasil diurutkan", opsi, "KELOLA", false)
+		menu("Data berhasil diurutkan", opsi, "KELOLA")
 		kelolaWorkout()
 	case 6:
 		cariLatihan()
 	case 7:
 		opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
-		menu("Pilih opsi: ", opsi, "MAIN", false)
+		menu("Pilih opsi: ", opsi, "MAIN")
 		main_menu()
 	default:
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Masukkan angka sesuai opsi!", opsi, "KELOLA", false)
+		menu("Masukkan angka sesuai opsi!", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 }
@@ -131,14 +129,14 @@ func tambahWorkout() {
 	dW[jumlahData] = w
 	jumlahData++
 	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-	menu("Pilih opsi:", opsi, "KELOLA", false)
+	menu("Pilih opsi:", opsi, "KELOLA")
 	kelolaWorkout()
 }
 
 func hapusWorkout() {
 	if jumlahData == 0 {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		menu("Belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 
@@ -150,7 +148,7 @@ func hapusWorkout() {
 
 	if index < 0 || index >= jumlahData {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Nomor tidak valid!", opsi, "KELOLA", false)
+		menu("Nomor tidak valid!", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 
@@ -160,14 +158,14 @@ func hapusWorkout() {
 
 	jumlahData--
 	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-	menu("workout berhasil dihapus", opsi, "KELOLA", false)
+	menu("workout berhasil dihapus", opsi, "KELOLA")
 	kelolaWorkout()
 }
 
 func ubahWorkout() {
 	if jumlahData == 0 {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 
@@ -179,7 +177,7 @@ func ubahWorkout() {
 
 	if index < 0 || index >= jumlahData {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Nomor tidak valid!", opsi, "KELOLA", false)
+		menu("Nomor tidak valid!", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 
@@ -194,14 +192,14 @@ func ubahWorkout() {
 	fmt.Scan(&dW[index].jadwal)
 
 	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-	menu("Workout berhasil diubah", opsi, "KELOLA", false)
+	menu("Workout berhasil diubah", opsi, "KELOLA")
 	kelolaWorkout()
 }
 
 func cariLatihan() {
 	if jumlahData == 0 {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 
@@ -215,7 +213,7 @@ func cariLatihan() {
 
 	if hasilIndex[0] == -1 {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("Latihan tidak ditemukan", opsi, "KELOLA", false)
+		menu("Latihan tidak ditemukan", opsi, "KELOLA")
 		kelolaWorkout()
 	} else {
 		fmt.Printf("%25s│  %-21s  %-10s  %-15s  %-19s│\n", "", "Workout", "Durasi", "Kalori", "Jadwal")
@@ -228,14 +226,14 @@ func cariLatihan() {
 			i++
 		}
 	}
-	opsi := []string{"Tekan apa saja untuk kembali"}
-	menu("data ditemukan", opsi, "", false)
+	fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
+	fmt.Printf("%25sTekan apa saja untuk kembali: ", "")
 
 	var pilihan int
 	fmt.Scan(&pilihan)
 
-	opsi = []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-	menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+	opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
+	menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 	kelolaWorkout()
 }
 
@@ -261,16 +259,198 @@ func sequentialSearchLatihan(keyword string) [NMAX]int {
 func rekomendasi() {
 	if jumlahData == 0 {
 		opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "MAIN", false)
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "MAIN")
 		main_menu()
 	}
+
+	var chest, legs, core, fullbody, back int
+
+    for i := 0; i < jumlahData; i++ {
+        bagian := bagianTubuh(dW[i].latihan)
+        if bagian == "Chest" {
+            chest++
+        } else if bagian == "Legs" {
+            legs++
+        } else if bagian == "Core" {
+            core++
+        } else if bagian == "Full Body" {
+            fullbody++
+        } else if bagian == "Back" {
+			back++
+		}
+    }
+
+    max := chest
+    bagianDominan := "Chest"
+
+    if legs > max {
+        max = legs
+        bagianDominan = "Legs"
+    }
+    if core > max {
+        max = core
+        bagianDominan = "Core"
+    }
+    if fullbody > max {
+        max = fullbody
+        bagianDominan = "Full Body"
+    }
+	if back> max {
+        max = back
+        bagianDominan = "Back"
+    }
+	bagianDominan = "Back"
+    printRekomendasi(bagianDominan)
+
 }
 
-func laporan(){
+func bagianTubuh(nama string) string {
+    if nama == "Push_Up" || nama == "Bench_Press" {
+        return "Chest"
+    } else if nama == "Box_Jump" || nama == "Deadlift" || nama == "High_Knees" || nama == "Jogging" || nama == "Bersepeda" || nama == "Jump Rope" || nama == "Squat" || nama == "Lunges"{
+        return "Legs"
+    } else if nama == "Plank" || nama == "Sit_Up" || nama == "Burpees" || nama == "Side_Plank" || nama == "Crunch"{
+        return "Core"
+    } else if nama == "Pull_Up" || nama == "Mountain_Climber" {
+        return "Back"
+    } else if nama == "Yoga" || nama == "Jumping_Jack" {
+        return "Full Body"
+    } else {
+        return "Unknown"
+    }
+}
+
+func printRekomendasi(bagian string) {
+    clear()
 	if jumlahData == 0 {
-		opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "MAIN", false)
-		main_menu()
+		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s│%26s%-47s│\n", "", "", "REKOMENDASI WORKOUT: ")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
+		fmt.Printf("%25s│%25s%-48s│\n", "", "", "Belum ada data workout.")
+		fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
+	} else {
+		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s│%26s%-47s│\n", "", "", "REKOMENDASI WORKOUT: ")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
+	}
+	if bagian == "Legs" || bagian == "Core" || bagian == "Back" {
+		fmt.Printf("%25s│ Bagian tubuh yang paling sering dilatih adalah: %s %-18s │\n", "", bagian, "")
+	} else if bagian == "Chest" {
+		fmt.Printf("%25s│ Bagian tubuh yang paling sering dilatih adalah: %s %-17s │\n", "", bagian, "")
+	} else {
+		fmt.Printf("%25s│ Bagian tubuh yang paling sering dilatih adalah: %s %-13s │\n", "", bagian, "")
+	}
+	fmt.Printf("%25s│ %s %41s │\n", "","Rekomendasi latihan tambahan:", "")
+
+    if bagian == "Chest" {
+		fmt.Printf("%25s│ %s %-53s │\n", "","- Incline Push Up", "")
+		fmt.Printf("%25s│ %s %-53s │\n", "","- Diamond Push Up", "")
+		fmt.Printf("%25s│ %s %-58s │\n", "","- Chest Dips", "")
+    } else if bagian == "Legs" {
+		fmt.Printf("%25s│ %s %-59s │\n", "","- Steps_Ups", "")
+		fmt.Printf("%25s│ %s %-57s │\n", "","- Calf_Raises", "")
+		fmt.Printf("%25s│ %s %-60s │\n", "","- Wall_Sit", "")
+    } else if bagian == "Core" {
+		fmt.Printf("%25s│ %s %-58s │\n", "","- Side_Plank", "")
+		fmt.Printf("%25s│ %s %-55s │\n", "","- Russian_Twist", "")
+		fmt.Printf("%25s│ %s %-58s │\n", "","- Leg_Raises", "")
+    } else if bagian == "Full Body" {
+		fmt.Printf("%25s│ %s %-55s │\n", "","- Jumping Jacks", "")
+		fmt.Printf("%25s│ %s %-51s │\n", "","- Mountain Climbers", "")
+		fmt.Printf("%25s│ %s %-58s │\n", "","- Bear Crawl", "")
+	}else if bagian == "Back" {
+		fmt.Printf("%25s│ %s %-56s │\n", "","- Lat_Pulldown", "")
+		fmt.Printf("%25s│ %s %-56s │\n", "","- Inverted_Row", "")
+		fmt.Printf("%25s│ %s %-60s │\n", "","- Bird_Dog", "")
+    } else {
+        fmt.Println("- Tidak ada rekomendasi yang tersedia.")
+    }
+	fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
+	fmt.Printf("%25sTekan apa saja untuk kembali: ", "")
+
+	var pilihan int
+	fmt.Scan(&pilihan)
+
+	opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
+	menu("Pilih keperluan anda", opsi, "MAIN")
+	main_menu()
+
+}
+
+
+func laporan() {
+	if jumlahData == 0 {
+		fmt.Println("Belum ada data workout untuk ditampilkan dalam laporan.")
+		return
+	}
+
+	var totalDurasi, totalKalori int
+	maxDurasi := dW[0].durasi
+	maxKalori := dW[0].kalori
+	idxMaxDurasi := 0
+	idxMaxKalori := 0
+
+	for i := 0; i < jumlahData; i++ {
+		totalDurasi += dW[i].durasi
+		totalKalori += dW[i].kalori
+
+		if dW[i].durasi > maxDurasi {
+			maxDurasi = dW[i].durasi
+			idxMaxDurasi = i
+		}
+
+		if dW[i].kalori > maxKalori {
+			maxKalori = dW[i].kalori
+			idxMaxKalori = i
+		}
+	}
+
+	rataDurasi := float64(totalDurasi) / float64(jumlahData)
+	rataKalori := float64(totalKalori) / float64(jumlahData)
+
+	printLaporan()
+	fmt.Printf("%25s│  %-21s  %-10d  %-15s  %-19s│\n", "", "Jumlah data workout :", jumlahData, "", "")
+	fmt.Printf("%25s│  %-21s  %-5d menit %-15s  %-19s│\n", "", "Total durasi :", totalDurasi, "", "")
+	fmt.Printf("%25s│  %-21s  %-10d  %-15s  %-19s│\n", "", "Total kalori :", totalKalori, "", "")
+	fmt.Printf("%25s│  %-21s  %.2f menit %-15s  %-19s│\n", "", "Rata-rata durasi :", rataDurasi, "", "")
+	fmt.Printf("%25s│  %-21s  %.2f kkal %-15s  %-19s│\n", "", "Rata-rata kalori :", rataKalori, "", "")
+	fmt.Printf("%25s│%73s│\n", "", "")
+	fmt.Printf("%25s│  %-21s  %-10s  %-15s  %-9s│\n", "", "Workout dengan durasi terlama :", "", "", "")
+	fmt.Printf("%25s│  - %s (%d menit, %d kalori, %s) %-34s│\n", "", dW[idxMaxDurasi].latihan, dW[idxMaxDurasi].durasi, dW[idxMaxDurasi].kalori, dW[idxMaxDurasi].jadwal, "")
+	fmt.Printf("%25s│  %-21s  %-10s  %-15s  %-7s│\n", "", "Workout dengan kalori terbanyak :", "", "", "")
+	fmt.Printf("%25s│  - %s (%d menit, %d kalori, %s) %-29s│\n", "", dW[idxMaxKalori].latihan, dW[idxMaxKalori].durasi, dW[idxMaxKalori].kalori, dW[idxMaxKalori].jadwal, "")
+
+	fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
+	fmt.Printf("%25sTekan apa saja untuk kembali: ", "")
+
+	var pilihan int
+	fmt.Scan(&pilihan)
+
+	opsi := []string{"1. Kelola Workout", "2. Rekomendasi Latihan", "3. Laporan", "4. Keluar"}
+	menu("Pilih keperluan anda", opsi, "MAIN")
+	main_menu()
+}
+
+func printLaporan() {
+	clear()
+	if jumlahData == 0 {
+		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s│%28s%-45s│\n", "", "", "LAPORAN WORKOUT: ")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
+		fmt.Printf("%25s│%25s%-48s│\n", "", "", "Belum ada data workout.")
+		fmt.Printf("%25s└─────────────────────────────────────────────────────────────────────────┘\n", "")
+	} else {
+		fmt.Printf("%25s┌─────────────────────────────────────────────────────────────────────────┐\n", "")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s│%28s%-45s│\n", "", "", "LAPORAN WORKOUT: ")
+		fmt.Printf("%25s│%73s│\n", "", "")
+		fmt.Printf("%25s├─────────────────────────────────────────────────────────────────────────┤\n", "")
 	}
 }
 
@@ -320,7 +500,7 @@ func printRiwayat() {
 func selectionSortDurasi() {
 	if jumlahData == 0 {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 	for i := 0; i < jumlahData-1; i++ {
@@ -339,7 +519,7 @@ func selectionSortDurasi() {
 func insertionSortKalori() {
 	if jumlahData == 0 {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
-		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA", false)
+		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 		kelolaWorkout()
 	}
 	for i := 1; i < jumlahData; i++ {
@@ -370,5 +550,18 @@ func load() {
 	dW[7] = workout{"Burpees", 15, 180, "16:55"}
 	dW[8] = workout{"Sit_Up", 35, 160, "17:15"}
 	dW[9] = workout{"Jump Rope", 20, 220, "17:55"}
-	jumlahData = 10
+	dW[10] = workout{"Pull_Up", 10, 100, "Selasa, 06:30"}
+	dW[11] = workout{"Mountain Climber", 15, 130, "06:50"}
+	dW[12] = workout{"High Knees", 20, 150, "07:10"}
+	dW[13] = workout{"Side Plank", 12, 60, "07:30"}
+	dW[14] = workout{"Jumping Jack", 25, 180, "07:50"}
+	dW[15] = workout{"Deadlift", 30, 250, "08:10"}
+	dW[16] = workout{"Bench Press", 25, 220, "08:30"}
+	dW[17] = workout{"Crunch", 20, 90, "08:50"}
+	dW[18] = workout{"Stretching", 15, 70, "09:10"}
+	dW[19] = workout{"Box Jump", 20, 190, "09:30"}
+
+	jumlahData = 20
 }
+
+
