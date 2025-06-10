@@ -134,6 +134,7 @@ func ubahWorkout() {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("belum ada data, silahkan tambah terlebih dahulu", opsi, "KELOLA")
 		kelolaWorkout()
+		return
 	}
 	var index int
 	fmt.Printf("%25sMasukkan nomor workout yang ingin diubah (1 -  %d): ", "", jumlahData)
@@ -143,6 +144,7 @@ func ubahWorkout() {
 		opsi := []string{"1. Tambah Workout", "2. Ubah Workout", "3. Hapus Workout", "4. Urutkan Berdasarkan Durasi", "5. Urutkan Berdasarkan Kalori", "6. Cari Latihan", "7. Kembali",}
 		menu("Nomor tidak valid!", opsi, "KELOLA")
 		kelolaWorkout()
+		return
 	}
 	fmt.Printf("%25sMasukkan data baru:\n", "")
 	fmt.Printf("%25sLatihan: ", "")
@@ -262,7 +264,7 @@ func sequentialSearchLatihan(keyword string) [NMAX]int {
 			jumlahHasil++
 		}
 	}
-	if jumlahHasil < 100 {
+	if jumlahHasil < NMAX {
 		hasil[jumlahHasil] = -1
 	}
 	return hasil
